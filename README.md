@@ -1,59 +1,186 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Absensi Digital Komnas HAM
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi absensi kegiatan berbasis web yang dikembangkan menggunakan Laravel untuk mendukung proses pencatatan kehadiran peserta dan pengelolaan data kegiatan secara digital.
 
-## About Laravel
+## Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **Absensi Digital:** peserta dapat memilih kegiatan dan mengisi kehadiran tanpa harus login.
+- **Tanda Tangan Digital:** pencatatan tanda tangan peserta pada proses absensi.
+- **Manajemen Pengguna:** pengelolaan akses berdasarkan peran pengguna.
+- **Manajemen Kegiatan:** pengelolaan data kegiatan yang diselenggarakan.
+- **Rekapitulasi Kehadiran:** pencatatan dan pengelolaan data kehadiran peserta.
+- **Ekspor Laporan:** ekspor rekapitulasi dalam format PDF dan CSV.
+- **Pengelolaan Akun:** fitur ganti password dan pemulihan password melalui email.
+- **Database SQLite:** penyimpanan data menggunakan SQLite.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Teknologi
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- PHP
+- Laravel
+- SQLite
+- Composer
+- HTML, CSS, dan JavaScript
 
-## Learning Laravel
+## Persyaratan Sistem
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Sebelum menjalankan aplikasi, pastikan perangkat telah memiliki:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP sesuai persyaratan pada `composer.json`
+- Composer
+- Git
+- Ekstensi PHP yang diperlukan, termasuk `pdo_sqlite`, `sqlite3`, `mbstring`, `openssl`, `fileinfo`, `dom`, dan `xml`
+- Ekstensi `gd` apabila diperlukan oleh fitur pemrosesan gambar dan PDF
 
-## Laravel Sponsors
+## Instalasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 1. Clone Repository
 
-### Premium Partners
+```bash
+git clone https://github.com/dinoapriyanto88/absensi-komnas-ham.git
+cd absensi-komnas-ham
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Instal Dependensi
 
-## Contributing
+```bash
+composer install
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 3. Siapkan File Environment
 
-## Code of Conduct
+Salin `.env.example` menjadi `.env`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Windows PowerShell:
 
-## Security Vulnerabilities
+```powershell
+Copy-Item .env.example .env
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Jika `.env` sudah tersedia, jangan menimpanya. Sesuaikan konfigurasi yang diperlukan.
 
-## License
+### 4. Siapkan Database
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Aplikasi menggunakan SQLite dengan lokasi database bawaan:
+
+`database/database.sqlite`
+
+Repository menyediakan `database/database-demo.sqlite` untuk pengujian.
+
+Jika database utama belum tersedia, salin database demo:
+
+```powershell
+Copy-Item database\database-demo.sqlite database\database.sqlite
+```
+
+**Penting:** jangan menjalankan perintah tersebut jika `database/database.sqlite` sudah berisi data yang ingin dipertahankan.
+
+### 5. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 6. Jalankan Aplikasi
+
+```bash
+php artisan serve
+```
+
+Buka aplikasi melalui browser:
+
+`http://127.0.0.1:8000`
+
+Halaman login:
+
+`http://127.0.0.1:8000/login`
+
+## Database Demo
+
+Database demo disediakan untuk membantu proses pengujian aplikasi.
+
+Untuk menggunakannya:
+
+1. Pastikan database utama belum berisi data penting.
+2. Salin `database/database-demo.sqlite` menjadi `database/database.sqlite`.
+3. Jalankan aplikasi menggunakan `php artisan serve`.
+4. Buka aplikasi dan uji fitur yang tersedia.
+
+Kredensial akun pengujian harus diverifikasi dan diberikan secara terpisah. README ini tidak menyertakan password akun.
+
+## Membuat Database Baru
+
+Untuk memulai dengan database kosong:
+
+1. Pastikan konfigurasi `.env` menggunakan SQLite.
+2. Pastikan file database tersedia.
+3. Jalankan migrasi:
+
+```bash
+php artisan migrate
+```
+
+Untuk membuat akun Superadmin melalui seeder, isi konfigurasi berikut di `.env`:
+
+```dotenv
+SUPERADMIN_USERNAME=superadmin
+SUPERADMIN_NAME=Superadmin
+SUPERADMIN_EMAIL=admin@example.com
+SUPERADMIN_PASSWORD=ganti_dengan_password_awal_yang_kuat
+```
+
+Password awal harus memiliki panjang minimal 12 karakter. Jangan menggunakan contoh password secara langsung.
+
+Kemudian jalankan:
+
+```bash
+php artisan db:seed
+```
+
+Seeder akan melewati pembuatan akun jika Superadmin sudah tersedia. Setelah akun dibuat, hapus nilai `SUPERADMIN_PASSWORD` dari `.env` sesuai petunjuk seeder.
+
+## Konfigurasi Email
+
+Fitur pemulihan password memerlukan konfigurasi SMTP yang valid pada `.env`.
+
+Sesuaikan pengaturan email dengan penyedia SMTP yang digunakan. Jangan mengunggah kredensial email atau password ke repository.
+
+## Keamanan
+
+- Jangan mengunggah file `.env` atau kredensial ke GitHub.
+- Gunakan password yang kuat dan berbeda untuk setiap akun.
+- Gunakan database demo hanya untuk pengujian.
+- Pastikan data demo tidak mengandung informasi pribadi yang tidak boleh dibagikan.
+- Untuk penggunaan produksi, terapkan HTTPS, pencadangan rutin, dan pengaturan akses yang sesuai.
+- Uji autentikasi, otorisasi, pengelolaan sesi, serta fitur pemulihan password sebelum aplikasi digunakan secara nyata.
+
+## Pemecahan Masalah
+
+### SQLite Driver Tidak Ditemukan
+
+Pastikan ekstensi `pdo_sqlite` dan `sqlite3` aktif pada PHP yang digunakan.
+
+```bash
+php -m
+```
+
+### Database Tidak Ditemukan
+
+Pastikan file `database/database.sqlite` tersedia dan `DB_CONNECTION=sqlite` telah dikonfigurasi.
+
+### Dependensi Gagal Dipasang
+
+Periksa versi PHP dan ekstensi yang dibutuhkan, kemudian jalankan kembali:
+
+```bash
+composer install
+```
+
+### Konfigurasi Tidak Terbaca
+
+```bash
+php artisan config:clear
+```
+
+## Lisensi
+
+Ketentuan penggunaan dan distribusi mengikuti lisensi yang ditetapkan pada repository.
